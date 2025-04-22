@@ -1,4 +1,5 @@
 import 'package:coffe_maker_project/features/appbar/coffee_maker_appbar.dart';
+import 'package:coffe_maker_project/features/pages/item_page/main_item_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,12 +13,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return const DefaultTabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 7,
       child: Scaffold(
         appBar: CoffeeMakerAppbar(preferredSize: Size.fromHeight(80)),
         body: TabBarView(children: [
-          Center(child: Text("Soon later.")),
+          Center(child: MainItemPage()),
           Center(child: Text("Soon later..")),
           Center(child: Text("Soon later...")),
           Center(child: Text("Soon later....")),
@@ -25,12 +26,6 @@ class _HomePageState extends State<HomePage> {
           Center(child: Text("Soon later......")),
           Center(child: Text("Soon later.......")),
         ]),
-        // body: Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Center(child: Text("Main Page"))
-        //   ],
-        // ),
       ),
     );
   }
