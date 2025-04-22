@@ -1,3 +1,4 @@
+import 'package:coffe_maker_project/features/menu_strip/menu_strip.dart';
 import 'package:coffe_maker_project/features/pages/profile_page/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +44,7 @@ class _CoffeeMakerAppbarState extends State<CoffeeMakerAppbar> {
           ),
         )
       ],
+      bottom: const TabBar(tabs: tabsItems, isScrollable: true,),
     );
   }
 }

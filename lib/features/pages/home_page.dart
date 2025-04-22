@@ -11,13 +11,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CoffeeMakerAppbar(preferredSize: Size.fromHeight(50)),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child: Text("Main Page"))
-        ],
+    return const DefaultTabController(
+      initialIndex: 1,
+      length: 7,
+      child: Scaffold(
+        appBar: CoffeeMakerAppbar(preferredSize: Size.fromHeight(80)),
+        body: TabBarView(children: [
+          Center(child: Text("Soon later.")),
+          Center(child: Text("Soon later..")),
+          Center(child: Text("Soon later...")),
+          Center(child: Text("Soon later....")),
+          Center(child: Text("Soon later.....")),
+          Center(child: Text("Soon later......")),
+          Center(child: Text("Soon later.......")),
+        ]),
+        // body: Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Center(child: Text("Main Page"))
+        //   ],
+        // ),
       ),
     );
   }
