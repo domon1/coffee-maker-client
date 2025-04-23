@@ -2,7 +2,6 @@ import 'package:coffe_maker_project/features/appbar/coffee_maker_appbar.dart';
 import 'package:coffe_maker_project/features/pages/item_page/main_item_page.dart';
 import 'package:coffe_maker_project/features/pages/item_page/second_item_page_combined.dart';
 import 'package:coffe_maker_project/features/pages/item_page/second_item_page_grid.dart';
-import 'package:coffe_maker_project/features/scroller/grid_item_scroller.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
