@@ -1,3 +1,5 @@
+import 'package:coffe_maker_project/features/pages/current_item_page/cup_size/cup_size_builder.dart';
+import 'package:coffe_maker_project/features/pages/current_item_page/extras/extras_builder.dart';
 import 'package:flutter/material.dart';
 
 class CurrentItemPage extends StatefulWidget {
@@ -45,77 +47,14 @@ class _CurrentItemPageState extends State<CurrentItemPage> {
                 "Настрой как любишь",
                 style: TextStyle(fontSize: 14),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+              const SizedBox(
+                height: 10,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //TODO: Заменить на кнопки мб?? (Добавить ListView.builder, создавать элементы в зависимости от списка)
-                    InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (BuildContext context) {
-                            return FractionallySizedBox(
-                              heightFactor: 0.5,
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: double.infinity,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Text("Посыпки", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Flexible(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                                          child: GridView.builder(
-                                            itemCount: 9,
-                                            gridDelegate:
-                                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 3,
-                                              crossAxisSpacing: 5,
-                                              mainAxisSpacing: 5,
-                                            ),
-                                            itemBuilder: (context, index) {
-                                              return Container(
-                                                color: Colors.amber,
-                                                child: Center(child: Text("$index")));
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                              border: Border.all(width: 1),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: const Center(child: Text("Посыпки"))),
-                    ),
-                    const SizedBox(
-                        width: 80,
-                        height: 80,
-                        child: Center(child: Text("Сиропы"))),
-                    const SizedBox(
-                        width: 80,
-                        height: 80,
-                        child: Center(child: Text("Топпинги"))),
-                  ],
+                  children: [ExtrasBuilder()],
                 ),
               ),
               const SizedBox(
@@ -130,13 +69,14 @@ class _CurrentItemPageState extends State<CurrentItemPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    //TODO: Заменить на кнопки мб?? (Добавить ListView.builder, создавать элементы в зависимости от списка)
-                    SizedBox(
-                        width: 80, height: 40, child: Center(child: Text("S"))),
-                    SizedBox(
-                        width: 80, height: 40, child: Center(child: Text("M"))),
-                    SizedBox(
-                        width: 80, height: 40, child: Center(child: Text("L"))),
+                    CupSizeBuilder()
+                    // //TODO: Заменить на кнопки мб?? (Добавить ListView.builder, создавать элементы в зависимости от списка)
+                    // SizedBox(
+                    //     width: 80, height: 40, child: Center(child: Text("S"))),
+                    // SizedBox(
+                    //     width: 80, height: 40, child: Center(child: Text("M"))),
+                    // SizedBox(
+                    //     width: 80, height: 40, child: Center(child: Text("L"))),
                   ],
                 ),
               ),
