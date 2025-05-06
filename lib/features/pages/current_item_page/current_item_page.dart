@@ -1,4 +1,4 @@
-import 'package:coffe_maker_project/features/pages/current_item_page/cup_size/cup_size_selector.dart';
+import 'package:coffe_maker_project/features/pages/current_item_page/cup_size/item_size_selector.dart';
 import 'package:coffe_maker_project/features/pages/current_item_page/extras/extras_builder.dart';
 import 'package:coffe_maker_project/util/test_data/models/item_model.dart';
 import 'package:coffe_maker_project/util/test_data/models/item_size.dart';
@@ -74,7 +74,7 @@ class _CurrentItemPageState extends State<CurrentItemPage> {
                 "Размер кружки",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              CupSizeSelector(
+              ItemSizeSelector(
                 sizes: widget.sizes,
                 selectedSizeId: sizeId,
                 onSizeSelected: (newSizeId) {

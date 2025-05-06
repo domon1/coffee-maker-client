@@ -2,8 +2,8 @@ import 'package:coffe_maker_project/features/pages/current_item_page/cup_size/it
 import 'package:coffe_maker_project/util/test_data/models/item_size.dart';
 import 'package:flutter/material.dart';
 
-class CupSizeSelector extends StatelessWidget {
-  const CupSizeSelector({
+class ItemSizeSelector extends StatelessWidget {
+  const ItemSizeSelector({
     super.key,
     required this.sizes,
     required this.selectedSizeId,
