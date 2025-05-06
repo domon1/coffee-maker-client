@@ -1,5 +1,6 @@
 import 'package:coffe_maker_project/features/menu_strip/menu_strip.dart';
 import 'package:coffe_maker_project/features/pages/profile_page/profile_page.dart';
+import 'package:coffe_maker_project/features/pages/profile_page/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeMakerAppbar extends StatefulWidget implements PreferredSizeWidget {

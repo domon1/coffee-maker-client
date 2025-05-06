@@ -1,3 +1,4 @@
+import 'package:coffe_maker_project/features/pages/profile_page/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -26,8 +27,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 32, 32, 35),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
                       width: double.infinity,
                       height: 80,
@@ -35,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             child: Row(
                               children: [
                                 Icon(
@@ -70,8 +71,25 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            child: Icon(Icons.arrow_forward_outlined, color: Colors.white,),
+                          InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const FractionallySizedBox(
+                                    heightFactor: 0.6,
+                                    child: SettingsPage(),
+                                  );
+                                },
+                              );
+                            },
+                            child: const SizedBox(
+                              child: Icon(
+                                Icons.arrow_forward_outlined,
+                                color: Colors.white,
+                              ),
+                            ),
                           )
                         ],
                       ),
@@ -105,10 +123,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     TextButton(
                       onPressed: () {},
                       style: const ButtonStyle(
-                        backgroundColor:
-                            WidgetStatePropertyAll<Color>(Colors.blue),
-                            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 40, vertical: 10))
-                      ),
+                          backgroundColor:
+                              WidgetStatePropertyAll<Color>(Colors.blue),
+                          padding: WidgetStatePropertyAll(EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 10))),
                       child: const Text(
                         "Заказать",
                         style: TextStyle(
