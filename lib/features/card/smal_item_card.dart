@@ -1,8 +1,12 @@
 import 'package:coffe_maker_project/features/pages/current_item_page/current_item_page.dart';
+import 'package:coffe_maker_project/util/test_data/models/item_model.dart';
+import 'package:coffe_maker_project/util/test_data/test_data.dart';
 import 'package:flutter/material.dart';
 
 class SmalItemCard extends StatelessWidget {
-  const SmalItemCard({super.key});
+  const SmalItemCard({super.key, required this.item});
+
+  final ItemModel item;
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +16,9 @@ class SmalItemCard extends StatelessWidget {
           isScrollControlled: true,
           context: context,
           builder: (BuildContext context) {
-            return const FractionallySizedBox(
+            return FractionallySizedBox(
               heightFactor: 0.9,
-              child: CurrentItemPage(),
+              child: CurrentItemPage(item: item, sizes: milkCoffeeSizes,),
             );
           },
         );
@@ -44,35 +48,38 @@ class SmalItemCard extends StatelessWidget {
                     children: [
                       Positioned.fill(
                         child: Image.asset(
-                          "assets/images/latte.jpeg",
+                          "assets/images/${item.imageUrl}",
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(Icons.error);
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                   height: 30,
                   width: double.infinity,
                   child: Text(
-                    "Латте",
-                    style: TextStyle(
+                    item.name,
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 10,
                         overflow: TextOverflow.ellipsis),
                   )),
-              const SizedBox(
+              SizedBox(
                 height: 30,
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "280 ₽",
-                      style: TextStyle(color: Colors.black, fontSize: 10),
+                      "${item.cost} ₽",
+                      style: const TextStyle(color: Colors.black, fontSize: 10),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_forward_outlined,
                       color: Colors.black,
                       size: 10,
