@@ -2,7 +2,7 @@ class ItemCartModel {
   final String imagePath;
   final String name;
   final String size;
-  final String price;
+  final int price;
   final List<String> additions;
 
   ItemCartModel ({

@@ -38,6 +38,7 @@ class _CartItemState extends State<CartItem> {
                         child: Image.asset(
                           widget.item.imagePath,
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
                         ),
                       ),
                     ),
@@ -73,7 +74,7 @@ class _CartItemState extends State<CartItem> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(widget.item.price),
+                    Text(widget.item.price.toString()),
                   ],
                 ),
               ),

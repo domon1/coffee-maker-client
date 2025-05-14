@@ -1,3 +1,4 @@
+import 'package:coffe_maker_project/util/test_data/models/item_cart_model.dart';
 import 'package:coffe_maker_project/util/test_data/models/item_extras.dart';
 import 'package:coffe_maker_project/util/test_data/models/item_model.dart';
 import 'package:coffe_maker_project/util/test_data/models/item_size.dart';
@@ -48,6 +49,25 @@ ItemExtras colorfulBallsSprinkle = ItemExtras(name: "Разноцветные ш
 ItemExtras marshmallowSprinkle = ItemExtras(name: "Маршмеллоу", price: 30, imageUrl: "marshmallow_sprinkle.jpeg");
 
 UserProfile mainUser = UserProfile(name: "Дмитрий", phoneNumber: "89585106287", mailForCheck: "");
+
+ItemCartModel item1 = ItemCartModel(imagePath: "assets/images/latte.jpeg", name: "Латте", size: "350 ml", price: 400, additions: []);
+ItemCartModel item2 = ItemCartModel(imagePath: "", name: "Капучино", size: "300 ml", price: 600, additions: [
+                        "Цитрусовый чипс",
+                        "Карамельный сироп",
+                        "Двойная порция эспрессо",
+                        "Кокосовое молоко",
+                      ]);
+ItemCartModel item3 = ItemCartModel(imagePath: "", name: "Макиатто", size: "50 ml", price: 900, additions: [
+                        "Двойная порция эспрессо",
+                        "Кокосовое молоко",
+                      ]);
+ItemCartModel item4 = ItemCartModel(imagePath: "", name: "Черный кофе", size: "150 ml", price: 200, additions: [
+                        "Цитрусовый чипс",
+                        "Карамельный сироп",
+                      ]);
+ItemCartModel item5 = ItemCartModel(imagePath: "", name: "Круасан", size: "120", price: 400, additions: []);
+
+List<ItemCartModel> carts = [item1, item2, item3, item4, item5,];
 
 
 Map<String, dynamic> ingredients = {
