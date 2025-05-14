@@ -1,12 +1,13 @@
 import 'package:coffe_maker_project/features/pages/current_item_page/ingredients/ingredients_builder.dart';
+import 'package:coffe_maker_project/util/test_data/models/item_extras.dart';
 import 'package:flutter/material.dart';
 
-Future<dynamic> extrasModalBottonSheet(BuildContext context) {
+Future<dynamic> extrasModalBottonSheet(BuildContext context, List<ItemExtras> extras) {
     return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return const FractionallySizedBox(
+        return FractionallySizedBox( 
           heightFactor: 0.5,
           child: SizedBox(
             width: double.infinity,
@@ -14,16 +15,16 @@ Future<dynamic> extrasModalBottonSheet(BuildContext context) {
             child: Center(
               child: Column(
                 children: [
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     "Посыпки",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Flexible(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: IngredientsBuilder(),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: IngredientsBuilder(ingredients: extras),
                     ),
                   ),
                 ],

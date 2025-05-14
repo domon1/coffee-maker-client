@@ -1,7 +1,10 @@
+import 'package:coffe_maker_project/util/test_data/models/item_extras.dart';
 import 'package:flutter/material.dart';
 
 class IngredientsWidget extends StatelessWidget {
-  const IngredientsWidget({super.key});
+  const IngredientsWidget({super.key, required this.ingredient});
+
+  final ItemExtras ingredient;
 
   @override
   Widget build(BuildContext context) {
@@ -9,21 +12,29 @@ class IngredientsWidget extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(width: 1),
           borderRadius: BorderRadius.circular(20)),
-      child: const Padding(
-        padding: EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               flex: 2,
+                child: Image.asset(
+              "assets/images/${ingredient.imageUrl}",
+              fit: BoxFit.fill,
+              errorBuilder: (context, error, stackTrace) =>
+                  const Icon(Icons.error),
+            )),
+            Expanded(
+              flex: 1,
               child: Text(
-                "Ингредиент который помещается в рамку",
-                //overflow: TextOverflow.ellipsis,
+                ingredient.name,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Expanded(
               flex: 1,
-              child: Text("+ 30 P"),
+              child: Text("+ ${ingredient.price} ₽"),
             )
           ],
         ),

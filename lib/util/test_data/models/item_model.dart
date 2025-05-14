@@ -4,11 +4,13 @@ class ItemModel {
   final String description;
   final String imageUrl;
   final int cost;
+  final String category;
 
   ItemModel(
       {required this.id,
       required this.name,
       required this.imageUrl,
       required this.cost,
-      required this.description});
+      required this.description,
+      required this.category});
 }

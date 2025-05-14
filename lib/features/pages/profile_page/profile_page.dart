@@ -1,8 +1,11 @@
 import 'package:coffe_maker_project/features/pages/profile_page/settings_page.dart';
+import 'package:coffe_maker_project/util/test_data/models/user_profile.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({super.key, required this.userProfile});
+
+  final UserProfile userProfile;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -36,31 +39,31 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const SizedBox(
+                          SizedBox(
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.account_circle_outlined,
                                   size: 50,
                                   color: Colors.white,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Дмитрий",
-                                        style: TextStyle(
+                                        widget.userProfile.name,
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
                                         ),
                                       ),
                                       Text(
-                                        "+7 958 510-62-87",
-                                        style: TextStyle(
+                                        widget.userProfile.phoneNumber,
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
@@ -77,9 +80,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 isScrollControlled: true,
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return const FractionallySizedBox(
+                                  return FractionallySizedBox(
                                     heightFactor: 0.6,
-                                    child: SettingsPage(),
+                                    child: SettingsPage(userProfile: widget.userProfile,),
                                   );
                                 },
                               );

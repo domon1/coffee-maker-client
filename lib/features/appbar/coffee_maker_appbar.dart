@@ -1,13 +1,15 @@
 import 'package:coffe_maker_project/features/menu_strip/menu_strip.dart';
 import 'package:coffe_maker_project/features/pages/profile_page/profile_page.dart';
-import 'package:coffe_maker_project/features/pages/profile_page/settings_page.dart';
+import 'package:coffe_maker_project/util/test_data/models/user_profile.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeMakerAppbar extends StatefulWidget implements PreferredSizeWidget {
-  const CoffeeMakerAppbar({super.key, required this.preferredSize});
+  const CoffeeMakerAppbar({super.key, required this.preferredSize, required this.userProfile});
 
   @override
   final Size preferredSize;
+
+  final UserProfile userProfile;
 
   @override
   State<CoffeeMakerAppbar> createState() => _CoffeeMakerAppbarState();
@@ -31,9 +33,9 @@ class _CoffeeMakerAppbarState extends State<CoffeeMakerAppbar> {
                 isScrollControlled: true,
                 context: context,
                 builder: (BuildContext context) {
-                  return const FractionallySizedBox(
+                  return FractionallySizedBox(
                     heightFactor: 0.9,
-                    child: ProfilePage(),
+                    child: ProfilePage(userProfile: widget.userProfile,),
                   );
                 },
               );

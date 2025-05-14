@@ -1,7 +1,10 @@
+import 'package:coffe_maker_project/util/test_data/models/user_profile.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+  SettingsPage({super.key, required this.userProfile});
+
+  UserProfile userProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class SettingsPage extends StatelessWidget {
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 32, 32, 35),
                   borderRadius: BorderRadius.circular(20)),
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,29 +37,29 @@ class SettingsPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Имя",
                           style: TextStyle(color: Colors.white),
                         ),
-                        Text(
-                          "Дмитрий",
-                          style: TextStyle(color: Colors.white),
+                        Text( // TODO Добавить возможносьт редактирования имени пользователя
+                          userProfile.name,
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.white,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Номер телефона",
                           style: TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "89585106287",
-                          style: TextStyle(color: Colors.white),
+                          userProfile.phoneNumber,
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ],
                     )
@@ -73,7 +76,7 @@ class SettingsPage extends StatelessWidget {
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 32, 32, 35),
                   borderRadius: BorderRadius.circular(20)),
-              child: const Padding(
+              child: const Padding( // TODO Добавить возможносьт редактирования почты
                 padding: EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,10 +85,7 @@ class SettingsPage extends StatelessWidget {
                       "Почта для чеков",
                       style: TextStyle(color: Colors.white),
                     ),
-                    Icon(
-                      Icons.add_outlined,
-                      color: Colors.white,
-                    ),
+                    Icon(Icons.mail_outlined, color: Colors.white,),
                   ],
                 ),
               ),
