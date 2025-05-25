@@ -1,5 +1,6 @@
 import 'package:coffe_maker_project/features/card/normal_item_card.dart';
 import 'package:coffe_maker_project/features/card/normal_wide_item_card.dart';
+import 'package:coffe_maker_project/util/test_data/test_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -24,12 +25,12 @@ class CombinedItemScroller extends StatelessWidget {
                 const QuiltedGridTile(1, 1),
               ]),
           childrenDelegate: SliverChildBuilderDelegate(
-            childCount: 5,
+            childCount: newsItems.length,
             (context, index) {
-              if (index > 0) {
-                return const NormalItemCard();
+              if (index % 5 != 0) {
+                return NormalItemCard(item: newsItems[index],);
               } else {
-                return const NormalWideItemCard();
+                return NormalWideItemCard(item: newsItems[index],);
               }
             } 
           ),

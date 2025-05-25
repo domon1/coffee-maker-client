@@ -12,24 +12,7 @@ class SmalItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showModalBottomSheet(
-          isScrollControlled: true,
-          context: context,
-          builder: (BuildContext context) {
-            return FractionallySizedBox(
-              heightFactor: 0.9,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
-                child: CurrentItemPage(
-                  item: item,
-                  sizes: milkCoffeeSizes,
-                ),
-              ),
-            );
-          },
-        );
+        showModalCurrentItemPage(context);
       },
       child: Card(
         elevation: 5,
@@ -100,5 +83,26 @@ class SmalItemCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<dynamic> showModalCurrentItemPage(BuildContext context) {
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) {
+          return FractionallySizedBox(
+            heightFactor: 0.9,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
+              child: CurrentItemPage(
+                item: item,
+                sizes: milkCoffeeSizes,
+              ),
+            ),
+          );
+        },
+      );
   }
 }

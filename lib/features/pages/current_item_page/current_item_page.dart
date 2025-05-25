@@ -235,7 +235,7 @@ class _CurrentItemPageState extends State<CurrentItemPage> {
                   Expanded(
                       child: Text(
                     "Доп.цена: $extraPrice",
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   )),
                   Expanded(
                     child: Container(
