@@ -1,203 +1,199 @@
+import 'package:coffe_maker_project/util/test_data/models/ingredient_category_model.dart';
+import 'package:coffe_maker_project/util/test_data/models/ingredient_model.dart';
 import 'package:flutter/material.dart';
 
 class DrinkCustomizer extends StatefulWidget {
-  final Map<String, dynamic> ingredients;
-  final ValueChanged<int> onPriceChanged;
+  final List<IngredientCategoryModel> categories;
+  final List<IngredientModel> defaultIngredients;
+  final List<IngredientModel> userSelectedIngredients;
+  final ValueChanged<double> onIngredientsChanged;
 
-  const DrinkCustomizer({
-    super.key,
-    required this.ingredients,
-    required this.onPriceChanged,
-  });
+  const DrinkCustomizer(
+      {required this.categories,
+      required this.defaultIngredients,
+      required this.userSelectedIngredients,
+      required this.onIngredientsChanged,
+      super.key});
 
   @override
   State<DrinkCustomizer> createState() => _DrinkCustomizerState();
 }
 
 class _DrinkCustomizerState extends State<DrinkCustomizer> {
-  final Map<String, dynamic> _selectedIngredients = {};
-  int _totalExtraPrice = 0;
+  int? _activeCategoryId;
+  late List<IngredientModel> _userIngredients;
 
   @override
   void initState() {
     super.initState();
-    // Инициализация без вызова onPriceChanged
-    _initializeSelections();
+    _userIngredients = List.from(widget.defaultIngredients);
   }
 
-  void _initializeSelections() {
-    for (var category in widget.ingredients.keys) {
-      if (widget.ingredients[category] is List &&
-          widget.ingredients[category].isNotEmpty) {
-        final firstItem = widget.ingredients[category][0];
-        if (firstItem is Map) {
-          final firstKey = firstItem.keys.first;
-          _selectedIngredients[category] =
-              category == 'milks' ? {firstKey: firstItem[firstKey]} : {};
+  void _handleCategoryTap(int categoryId) {
+    setState(() {
+      _activeCategoryId = (_activeCategoryId == categoryId ? null : categoryId);
+    });
+  }
+
+  void _handleIngredientTap(
+      IngredientModel ingredient, IngredientCategoryModel category) {
+    setState(() {
+      if (category.isMultiplySelect) {
+        // Для категорий с множественным выбором
+        if (_userIngredients.any((item) => item.id == ingredient.id)) {
+          _userIngredients.removeWhere((item) => item.id == ingredient.id);
+        } else {
+          _userIngredients.add(ingredient);
         }
+      } else {
+        // Для категорий с единичным выбором
+        _userIngredients.removeWhere(
+            (item) => category.ingredients.any((ing) => ing.id == item.id));
+        _userIngredients.add(ingredient);
       }
-    }
-    // Отложенный вызов после инициализации
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _calculateTotalPrice();
+      widget.onIngredientsChanged(_calculateTotalPrice());
     });
   }
 
-  void _calculateTotalPrice() {
-    int total = 0;
-    _selectedIngredients.forEach((category, ingredients) {
-      if (ingredients is Map) {
-        ingredients.forEach((key, value) {
-          total += value['price'] as int;
-        });
-      }
-    });
-    setState(() => _totalExtraPrice = total);
-    widget.onPriceChanged(total);
+  bool _isIngredientSelected(IngredientModel ingredient) {
+    return _userIngredients.any((item) => item.id == ingredient.id);
   }
 
-  void _showIngredientModal(String category) {
-    final bool isMultiSelect = category != 'milks';
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => _buildIngredientModal(category, isMultiSelect),
-    );
-  }
-
-  dynamic _showSelectedIngredients(Map<dynamic, dynamic> ingredientsList) {
-    int priceCount = 0;
-    ingredientsList.forEach((key, value) {
-      value.forEach((key, value) {
-        if (key == "price"){
-          priceCount += value as int;
-        }
-      });
-    });
-    if (priceCount == 0){
-      return "";
-    }
-    return "+ $priceCount p";
-  }
-
-  Widget _buildIngredientModal(String category, bool isMultiSelect) {
-    final List<dynamic> items = widget.ingredients[category] ?? [];
-
-    return FractionallySizedBox(
-      heightFactor: 0.5,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              category.toUpperCase(),
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  final itemKey = item.keys.first;
-                  final itemData = item[itemKey];
-                  final isSelected = isMultiSelect
-                      ? (_selectedIngredients[category] as Map)
-                          .containsKey(itemKey)
-                      : (_selectedIngredients[category] as Map).keys.first ==
-                          itemKey;
-
-                  return ListTile(
-                    title: Text(itemData['name']),
-                    trailing: Text('+${itemData['price']} ₽'),
-                    leading: isSelected
-                        ? const Icon(Icons.check, color: Colors.green)
-                        : null,
-                    onTap: () {
-                      setState(() {
-                        if (isMultiSelect) {
-                          if (isSelected) {
-                            (_selectedIngredients[category] as Map)
-                                .remove(itemKey);
-                          } else {
-                            (_selectedIngredients[category] as Map)[itemKey] =
-                                itemData;
-                          }
-                        } else {
-                          _selectedIngredients[category] = {itemKey: itemData};
-                        }
-                        _calculateTotalPrice();
-                        Navigator.pop(context);
-                      });
-                    },
-                  );
-                },
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Готово'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryButton(String category) {
-    //final currentSelection = _selectedIngredients[category] ?? {};
-    // String displayText = 'Не выбрано';
-
-    // if (currentSelection is Map && currentSelection.isNotEmpty) {
-    //   if (category == 'milks') {
-    //     displayText = currentSelection.values.first['name'];
-    //   } else {
-    //     displayText = 'Выбрано: ${currentSelection.length}';
-    //   }
-    // }
-
-    return InkWell(
-      onTap: () {
-        _showIngredientModal(category);
-      },
-      child: Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-              border: Border.all(width: 1),
-              borderRadius: BorderRadius.circular(20)),
-          child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(category == 'milks'
-                      ? 'Молоко'
-                      : category == 'syrups'
-                          ? 'Сиропы'
-                          : category == 'toppings'
-                              ? 'Посыпки'
-                              : category),
-                              Text(_showSelectedIngredients(_selectedIngredients[category]))
-                ],
-              ))),
-    );
+  double _calculateTotalPrice() {
+    return _userIngredients.fold(0, (sum, item) => sum + item.price);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ...widget.ingredients.keys
-              .map((category) => _buildCategoryButton(category)),
+          Center(
+            child: Column(
+              children: [
+                if (_activeCategoryId != null)
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      children: widget.categories
+                          .firstWhere((cat) => cat.id == _activeCategoryId)
+                          .ingredients
+                          .map((ingredient) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 10, bottom: 5),
+                          child: InkWell(
+                            onTap: () => _handleIngredientTap(
+                              ingredient,
+                              widget.categories.firstWhere(
+                                  (cat) => cat.id == _activeCategoryId),
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              width: 65,
+                              decoration: BoxDecoration(
+                                border: Border.all(width: _isIngredientSelected(ingredient) ? 3: 1),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.05),
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                      Icons.filter), // TODO change to image
+                                  Text(
+                                    ingredient.name,
+                                    style: const TextStyle(
+                                        overflow: TextOverflow.clip,
+                                        fontSize: 10),
+                                  ),
+                                  Text(
+                                    "+${ingredient.price.toStringAsFixed(0)} ₽",
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Row(
+                    children: widget.categories.map((category) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: InkWell(
+                          onTap: () => _handleCategoryTap(category.id),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                  width:
+                                      _activeCategoryId == category.id ? 3 : 1),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    // TODO change to image
+                                    Icons.inbox,
+                                    size: 36,
+                                  ),
+                                  Text(
+                                    category.name,
+                                    style: TextStyle(
+                                      fontSize: _activeCategoryId == category.id
+                                          ? 16
+                                          : 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 }
+

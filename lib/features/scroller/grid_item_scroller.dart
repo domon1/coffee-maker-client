@@ -8,7 +8,7 @@ class GridItemScroller extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10,),
         child: GridView.builder(
           itemCount: 10,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

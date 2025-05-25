@@ -1,11 +1,11 @@
 import 'package:coffe_maker_project/features/pages/current_item_page/ingredients/ingredients_widget.dart';
-import 'package:coffe_maker_project/util/test_data/models/item_extras.dart';
+import 'package:coffe_maker_project/util/test_data/models/ingredient_model.dart';
 import 'package:flutter/material.dart';
 
 class IngredientsBuilder extends StatelessWidget {
   const IngredientsBuilder({super.key, required this.ingredients});
 
-  final List<ItemExtras> ingredients;
+  final List<IngredientModel> ingredients;
 
   @override
   Widget build(BuildContext context) {

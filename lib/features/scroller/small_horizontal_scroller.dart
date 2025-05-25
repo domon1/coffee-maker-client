@@ -10,14 +10,14 @@ class SmallHorizontalScroller extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 156,
+      height: 170,
       width: double.infinity,
       child: ListView.builder(
         itemCount: items.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10),
+          return Padding( 
+            padding: const EdgeInsets.only(left: 10, bottom: 10),
             child: SmalItemCard(item: items[index],),
           );
         },

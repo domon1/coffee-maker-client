@@ -18,13 +18,21 @@ class SmalItemCard extends StatelessWidget {
           builder: (BuildContext context) {
             return FractionallySizedBox(
               heightFactor: 0.9,
-              child: CurrentItemPage(item: item, sizes: milkCoffeeSizes,),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                child: CurrentItemPage(
+                  item: item,
+                  sizes: milkCoffeeSizes,
+                ),
+              ),
             );
           },
         );
       },
       child: Card(
-        elevation: 10,
+        elevation: 5,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(20),

@@ -21,7 +21,7 @@ class _MainItemPageState extends State<MainItemPage> {
             height: 15,
           ),
           const Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(10),
             child: Text(
               "Популярные напитки",
               style: TextStyle(
@@ -35,7 +35,7 @@ class _MainItemPageState extends State<MainItemPage> {
             height: 15,
           ),
           const Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(10),
             child: Text(
               "Новое для тебя",
               style: TextStyle(
@@ -48,11 +48,14 @@ class _MainItemPageState extends State<MainItemPage> {
           const SizedBox(
             height: 15,
           ),
-          const Text(
-            "Весенний вкус",
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
+          const Padding(
+            padding: EdgeInsets.all(10),
+            child: Text(
+              "Весенний вкус",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           SmallHorizontalScroller(items: eatItems,),

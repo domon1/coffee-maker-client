@@ -23,12 +23,17 @@ class ItemSizeWidget extends StatelessWidget {
       child: Container(
         width: 90,
         decoration: BoxDecoration(
-          border: Border.all(width: 1),
+          border: Border.all(width: selectedSizeId == index ? 3 : 1),
           borderRadius: BorderRadius.circular(20),
-          color: selectedSizeId == index ? Colors.blue : null,
         ),
         child: Center(
-          child: Text(size.name),
+          child: Text(
+            size.name,
+            style: TextStyle(
+                fontWeight: selectedSizeId == index
+                    ? FontWeight.bold
+                    : FontWeight.normal),
+          ),
         ),
       ),
     );

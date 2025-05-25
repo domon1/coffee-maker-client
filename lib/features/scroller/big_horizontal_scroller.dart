@@ -7,14 +7,14 @@ class BigHorizontalScroller extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 305,
       width: double.infinity,
       child: ListView.builder(
         itemCount: 8,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return const Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: EdgeInsets.only(left: 10, bottom: 10),
             child: BigItemCard(),
           );
         },

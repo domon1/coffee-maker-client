@@ -28,10 +28,6 @@ class _SecondItemPageGridState extends State<SecondItemPageGrid> {
           ),
         ),
         GridItemScroller(),
-        SizedBox(
-          height: 15,
-        ),
-        
       ],
     );
   }

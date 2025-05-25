@@ -1,5 +1,6 @@
+import 'package:coffe_maker_project/util/test_data/models/ingredient_category_model.dart';
+import 'package:coffe_maker_project/util/test_data/models/ingredient_model.dart';
 import 'package:coffe_maker_project/util/test_data/models/item_cart_model.dart';
-import 'package:coffe_maker_project/util/test_data/models/item_extras.dart';
 import 'package:coffe_maker_project/util/test_data/models/item_model.dart';
 import 'package:coffe_maker_project/util/test_data/models/item_size.dart';
 import 'package:coffe_maker_project/util/test_data/models/user_profile.dart';
@@ -31,22 +32,23 @@ ItemSize blackCoffeeLarge = ItemSize(id: 4, name: "L (400 мл)", addPrice: 50);
 ItemSize coffeeLarge = ItemSize(id: 5, name: "L (450 мл)", addPrice: 100);
 
 
-// ItemExtras
-ItemExtras cowMilk = ItemExtras(name: "Молоко коровье", price: 0, imageUrl: "cow_milk.jpeg");
-ItemExtras almondMilk = ItemExtras(name: "Молоко миндальное", price: 85, imageUrl: "almond_milk.jpeg");
-ItemExtras bananaMilk = ItemExtras(name: "Молоко бананновое", price: 85, imageUrl: "banana_milk.jpeg");
-ItemExtras oatMilk = ItemExtras(name: "Молоко овсяное", price: 85, imageUrl: "oat_milk.jpeg");
+// IngredientModel
+IngredientModel cowMilk = IngredientModel(id: 1, name: "Молоко коровье", price: 0, imageUrl: "cow_milk.jpeg");
+IngredientModel almondMilk = IngredientModel(id: 2, name: "Молоко миндальное", price: 85, imageUrl: "almond_milk.jpeg");
+IngredientModel bananaMilk = IngredientModel(id: 3, name: "Молоко бананновое", price: 85, imageUrl: "banana_milk.jpeg");
+IngredientModel oatMilk = IngredientModel(id: 4, name: "Молоко овсяное", price: 85, imageUrl: "oat_milk.jpeg");
 
-ItemExtras caramelSyrup = ItemExtras(name: "Сироп карамельный", price: 35, imageUrl: "caramel_syrup.jpeg");
-ItemExtras mintSyrup = ItemExtras(name: "Сироп мятный", price: 35, imageUrl: "mint_syrup.jpeg");
-ItemExtras vanillaSyrup = ItemExtras(name: "Сироп ванильный", price: 35, imageUrl: "vanilla_syrup.jpeg");
-ItemExtras creamSyrup = ItemExtras(name: "Сироп слтвочый", price: 35, imageUrl: "cream_syrup.jpeg");
+IngredientModel caramelSyrup = IngredientModel(id: 5, name: "Сироп карамельный", price: 35, imageUrl: "caramel_syrup.jpeg");
+IngredientModel mintSyrup = IngredientModel(id: 6, name: "Сироп мятный", price: 35, imageUrl: "mint_syrup.jpeg");
+IngredientModel vanillaSyrup = IngredientModel(id: 7, name: "Сироп ванильный", price: 35, imageUrl: "vanilla_syrup.jpeg");
+IngredientModel creamSyrup = IngredientModel(id: 8, name: "Сироп слтвочый", price: 35, imageUrl: "cream_syrup.jpeg");
 
-ItemExtras raspberrySprinkle = ItemExtras(name: "Посыпка малиновая", price: 10, imageUrl: "raspberry_sprinkle.jpeg");
-ItemExtras blueberrySprinkle = ItemExtras(name: "Посыпка черничная", price: 10, imageUrl: "blueberry_sprinkle.jpeg");
-ItemExtras cocoaSprinkle = ItemExtras(name: "Посыпка какао", price: 0, imageUrl: "cocoa_sprinkle.jpeg");
-ItemExtras colorfulBallsSprinkle = ItemExtras(name: "Разноцветные шарики", price: 25, imageUrl: "colorful_balls_sprinkle.jpeg");
-ItemExtras marshmallowSprinkle = ItemExtras(name: "Маршмеллоу", price: 30, imageUrl: "marshmallow_sprinkle.jpeg");
+IngredientModel raspberrySprinkle = IngredientModel(id: 9, name: "Посыпка малиновая", price: 10, imageUrl: "raspberry_sprinkle.jpeg");
+IngredientModel blueberrySprinkle = IngredientModel(id: 10, name: "Посыпка черничная", price: 10, imageUrl: "blueberry_sprinkle.jpeg");
+IngredientModel cocoaSprinkle = IngredientModel(id: 11, name: "Посыпка какао", price: 0, imageUrl: "cocoa_sprinkle.jpeg");
+IngredientModel colorfulBallsSprinkle = IngredientModel(id: 12, name: "Разноцветные шарики", price: 25, imageUrl: "colorful_balls_sprinkle.jpeg");
+IngredientModel marshmallowSprinkle = IngredientModel(id: 13, name: "Маршмеллоу", price: 30, imageUrl: "marshmallow_sprinkle.jpeg");
+
 
 UserProfile mainUser = UserProfile(name: "Дмитрий", phoneNumber: "89585106287", mailForCheck: "");
 
@@ -70,38 +72,17 @@ ItemCartModel item5 = ItemCartModel(imagePath: "", name: "Круасан", size:
 List<ItemCartModel> carts = [item1, item2, item3, item4, item5,];
 
 
-Map<String, dynamic> ingredients = {
-  "milks": [
-    {
-      "oatMilk": {"name": "Овсяное молоко", "price": 25}
-    },
-    {
-      "cowMilk": {"name": "Коровье молоко", "price": 0}
-    }
-  ],
-  "syrups": [
-    {
-      "raspberrySyrup": {"name": "Малиновый сироп", "price": 15}
-    },
-    {
-      "blueberrySyrup": {"name": "Черничный сироп", "price": 15}
-    }
-  ],
-  "toppings": [
-    {
-      "chocolate": {"name": "Шоколадная крошка", "price": 10}
-    },
-    {
-      "cinnamon": {"name": "Корица", "price": 5}
-    }
-  ]
-};
-
 // Result 
-List<ItemExtras> milkExtras = [cowMilk, almondMilk, bananaMilk, oatMilk];
-List<ItemExtras> syropExtras = [caramelSyrup, mintSyrup, vanillaSyrup, creamSyrup];
-List<ItemExtras> sprinkleExtras = [raspberrySprinkle, blueberrySprinkle, cocoaSprinkle, colorfulBallsSprinkle, marshmallowSprinkle];
-List<List<ItemExtras>> itemExtras = [milkExtras, sprinkleExtras, sprinkleExtras];
+List<IngredientModel> milkExtras = [cowMilk, almondMilk, bananaMilk, oatMilk];
+List<IngredientModel> syropExtras = [caramelSyrup, mintSyrup, vanillaSyrup, creamSyrup];
+List<IngredientModel> sprinkleExtras = [raspberrySprinkle, blueberrySprinkle, cocoaSprinkle, colorfulBallsSprinkle, marshmallowSprinkle];
+
+IngredientCategoryModel milks = IngredientCategoryModel(id: 1, name: "Молоко", isMultiplySelect: false, ingredients: milkExtras);
+IngredientCategoryModel syrops = IngredientCategoryModel(id: 2, name: "Сиропы", isMultiplySelect: true, ingredients: syropExtras);
+IngredientCategoryModel sprinklies = IngredientCategoryModel(id: 3, name: "Посыпки", isMultiplySelect: true, ingredients: sprinkleExtras);
+
+List<IngredientCategoryModel> categories = [milks, syrops, sprinklies, milks, syrops, sprinklies];
+List<IngredientModel> defaultIngredients = [cowMilk];
 
 List<ItemSize> milkCoffeeSizes = [coffeeSmall, coffeeMedium, coffeeLarge];
 List<ItemSize> blackCoffeeSizes = [blackCoffeeSmall, blackCoffeeMedium, blackCoffeeLarge];

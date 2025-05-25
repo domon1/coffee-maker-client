@@ -1,10 +1,10 @@
-import 'package:coffe_maker_project/util/test_data/models/item_extras.dart';
+import 'package:coffe_maker_project/util/test_data/models/ingredient_model.dart';
 import 'package:flutter/material.dart';
 
 class IngredientsWidget extends StatelessWidget {
   const IngredientsWidget({super.key, required this.ingredient});
 
-  final ItemExtras ingredient;
+  final IngredientModel ingredient;
 
   @override
   Widget build(BuildContext context) {
